@@ -1,0 +1,20 @@
+<%= turbo_frame_tag "messages-page-#{@pagy.page}" do%>
+  <%= render "users/next_page"%>
+  <% if @pagy.next == nil %>
+    <div class="w-100 d-flex justify-content-center">
+      <div class="text-center rounded p-1" style="width: 120px; background-color: #F5F7FB;">
+        <%= message_date(@messages.first)%>
+      </div>
+    </div>
+  <% end %>
+  <% @messages.each_with_index do |message, index|%>
+    <% if message.created_at.to_date != @messages[index - 1].created_at&.to_date && @messages[index - 1] != @messages.last%>
+      <div class="w-100 d-flex justify-content-center">
+        <div class="text-center rounded p-1" style="width: 120px; background-color: #F5F7FB;">
+          <%= message_date(message)%>
+        </div>
+      </div>
+    <% end %>
+    <%= render "messages/message", message: message%>
+  <%end%>
+<% end %>

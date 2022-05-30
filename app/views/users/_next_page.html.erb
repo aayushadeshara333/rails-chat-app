@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "messages-page-#{@pagy.next}", loading: :lazy, src: pagy_url_for(@pagy, @pagy.next) do%>
+  <div class="w-100 d-flex justify-content-center align-items-center">
+    <div class="loader_pagy"></div>
+  </div>
+<% end %>

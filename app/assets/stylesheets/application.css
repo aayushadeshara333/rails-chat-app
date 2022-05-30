@@ -1,0 +1,201 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+body {
+  overflow: hidden;
+}
+
+.msg-form {
+  width: 100%;
+  height: 56px;
+  padding: 10px;
+}
+
+#single_room {
+  height: calc(100vh - 165px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px 10px;
+}
+
+.message_form {
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+#room_container {
+  height: 100vh;
+  margin-right: 0px !important;
+  background-color: #F5F7FB;
+}
+
+#side_panel {
+  height: 100vh;
+  margin-right: 0px !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-bottom: 55px;
+  background-color: #F5F7FB;
+}
+
+#chatroom_container {
+  height: 100vh;
+  margin-right: 0px !important;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.msg-content {
+  width: 80%;
+  margin-right: 5px;
+}
+
+.message-box {
+  word-wrap: break-word;
+  width: fit-content;
+  max-width: 40%;
+  padding: 5%;
+  border-radius: 0px 10px 10px 10px;
+  margin-bottom: 5px;
+  background-color: #F5F7FB;
+  color: #565656;
+  padding: 10px;
+}
+
+.my_msg {
+  background-color: #007bff !important;
+  margin-right: 5px;
+}
+
+.my_msg_cont {
+  display: flex;
+  justify-content: end;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+.room-style,
+.user-style {
+  border-bottom: 1px solid #F5F7FB;
+  background-color: #ffffff;
+  color: #565656;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.smooth {
+  scroll-behavior: smooth;
+}
+
+.user-container,
+.room-container {
+  height: calc(50vh - 95px);
+  overflow: hidden;
+  overflow-y: scroll;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.custom-input {
+  background: transparent !important;
+  color: #ffffff !important;
+  margin-right: 10px;
+}
+
+.dark-color {
+  color: #565656 !important;
+}
+
+.font-message-author {
+  font-size: 12px;
+  color: #787878 !important;
+}
+
+.font-message-time {
+  text-align-last: right;
+  font-size: 10px;
+  color: #787878 !important;
+}
+
+.loader span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  background: #787878;
+  border-radius: 20px;
+  animation: loader 0.8s infinite alternate;
+}
+
+.loader span:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+
+.loader span:nth-of-type(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes loader {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+}
+
+.loader_pagy {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #787878;
+  width: 25px;
+  height: 25px;
+  -webkit-animation: spin 1s linear infinite;
+  /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

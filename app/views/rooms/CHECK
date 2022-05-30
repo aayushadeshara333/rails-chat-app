@@ -1,0 +1,73 @@
+<%= turbo_frame_tag "appearance_channel"%>
+<div id="appearance_channel"></div>
+<div id="chatroom_container" class="row text-dark">
+  <div id="side_panel" class="col-md-3 col-sm-3">
+    <%= turbo_stream_from "user_status"%>
+    <div class="d-flex">
+      <div>
+        <%= render "users/status", user: current_user%>
+      </div>
+      <%= current_user.email%>
+    </div>
+    <div class="pl-3">
+      <h5 class="pt-2 text-center dark-color"><b>Users</b></h5>
+      <%= turbo_stream_from "users" %>
+      <div class="user-container">
+        <% if @users.length == 0 %>
+          <div class="d-flex justify-content-center align-items-center h-100 dark-color">
+            Not chatted with any one yet
+          </div>
+        <% end %>
+        <div id="users">
+          <%= turbo_stream_from "typing_channel"%>
+          <% if @users.length > 0 %>
+            <% @users.each do |user|%>
+              <%= render "users/user", user: user%>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <h5 class="pt-5 pb-1 text-center dark-color"><b>Rooms</b></h5>
+      <%= turbo_stream_from "rooms"%>
+      <div class="room-container">
+        <% if @rooms.length == 0 %>
+          <div class="d-flex justify-content-center align-items-center h-100 dark-color">
+            Not joined in any room yet
+          </div>
+        <% end %>
+        <div id="rooms">
+          <%= render @rooms if @rooms.length > 0%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="room_container", class="col-md-9 col-sm-9 text-dark">
+    <% if @single_room %>
+      <h5 class="text-center pt-2 dark-color"><b><%= @user&.email || @single_room.name %></b></h4>
+      <div id="single_room" data-controller="scroll">
+        <%= turbo_stream_from @single_room%>
+        <div id="messages">
+          <%= render "users/next_page"%>
+          <% @messages.each_with_index do |message, index|%>
+            <% if message.created_at.to_date != @messages[index - 1].created_at&.to_date && @messages[index - 1] != @messages.last%>
+              <div class="w-100 d-flex justify-content-center">
+                <div class="text-center rounded p-1" style="width: 120px; background-color: #F5F7FB;">
+                  <%= message_date(message)%>
+                </div>
+              </div>
+            <% end %>
+            <%= render "messages/message", message: message%>
+          <%end%>
+          <%= turbo_stream_from "typing_channel_#{other_user(@single_room.participants).split("_").reverse.join("_")}"%>
+        </div>
+        <div>
+          <%= turbo_frame_tag "typing_channel_#{other_user(@single_room.participants).split("_").reverse.join("_")}" %>
+          <div id="typing_<%= other_user(@single_room.participants).split("_").reverse.join("_") %>"></div>
+        </div>
+      </div>
+      <div class="message_form">
+        <%= render "layouts/new_message_form"%>
+      </div>
+    <% end %>
+  </div>
+</div>

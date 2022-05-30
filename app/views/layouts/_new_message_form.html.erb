@@ -1,0 +1,16 @@
+<div>
+  <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex",
+     data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |form| %>
+    <%= form.text_field :body, id: "chat-text", class: "form-control msg-content w-100", autocomplete: "off",  connection_id: @single_room.id, required: true%>
+    <%= form.submit "Send", data: {disable_with: false}, class: "btn btn-warning text-light", style: "background-color: #52688F; border: none;"%>
+  <% end %>
+</div>
+<script>
+  $('#chat-text').keyup(function(e) {
+   if (e.target.value !== "") {
+     $('#typing').css({'display': 'inline-block'});
+   } else {
+     $('#typing').css({'display': 'none'});
+   }
+  });
+</script>
