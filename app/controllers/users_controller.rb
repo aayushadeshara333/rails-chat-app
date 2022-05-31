@@ -15,11 +15,11 @@ class UsersController < ApplicationController
     @rooms = Room.public_rooms.joins(:messages).where("messages.user_id = #{current_user.id}").distinct
     @room_name = get_name(@user, current_user)
     @single_room = Room.where(name: @room_name).first || Room.create_private_room([@user, current_user], @room_name)
+    hash = MessagesBuilder.new(@single_room)
     @message = Message.new
-    # @messages = @single_room.messages.order(created_at: :asc)
-    pagy_messages = @single_room.messages.order(created_at: :desc)
-    @pagy, @messages = pagy(pagy_messages, items: 13)
-    @messages = @messages.reverse
+    @pagy, @messages = pagy_array(hash.getMessages.to_a.reverse, items: 1)
+    @messages[0][0] = [@messages[0][0]]
+    @messages = Hash[*@messages[0]]
     if params[:page]
       render "users/scrollable_list"
     else

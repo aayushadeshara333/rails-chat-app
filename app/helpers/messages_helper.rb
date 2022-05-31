@@ -3,14 +3,14 @@ module MessagesHelper
     user.id == c_user.id ? [" my_msg_cont", " my_msg"] : ""
   end
 
-  def message_date(message)
+  def message_date(date)
     yesterday = DateTime.now - 1.day
-    if message.created_at.to_date == DateTime.now.to_date
+    if date == DateTime.now.to_date
       return "Today"
-    elsif message.created_at.to_date == yesterday.to_date
+    elsif date == yesterday.to_date
       return "Yesterday"
     else
-      return message.created_at.strftime("%d %b %Y")
+      return date.strftime("%d %b %Y")
     end
   end
 

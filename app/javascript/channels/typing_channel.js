@@ -4,17 +4,20 @@ consumer.subscriptions.create("TypingChannel", {
   connected() {
     const input = document.getElementById("chat-text")
     const connection_id = input.getAttribute("connection_id");
+    const user = input.getAttribute("user");
     input.addEventListener("keyup", (e) => {
       console.log(connection_id);
       if (e.target.value.length > 0) {
         this.isTyping({
           is_typing: true,
-          connection_id
+          connection_id,
+          user
         })
       } else {
         this.isTyping({
           is_typing: false,
-          connection_id
+          connection_id,
+          user
         })
       }
     });

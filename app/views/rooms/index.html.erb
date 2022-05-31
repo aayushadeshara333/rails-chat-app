@@ -48,15 +48,15 @@
         <%= turbo_stream_from @single_room%>
         <div id="messages">
           <%= render "users/next_page"%>
-          <% @messages.each_with_index do |message, index|%>
-            <% if message.created_at.to_date != @messages[index - 1].created_at&.to_date && @messages[index - 1] != @messages.last%>
-              <div class="w-100 d-flex justify-content-center">
-                <div class="text-center rounded p-1" style="width: 120px; background-color: #F5F7FB;">
-                  <%= message_date(message)%>
-                </div>
+          <% @messages.each do |date, messages_array|%>
+            <div class="w-100 d-flex justify-content-center">
+              <div class="text-center rounded p-1" style="width: 120px; background-color: #F5F7FB;">
+                <%= message_date(date[0])%>
               </div>
+            </div>
+            <% messages_array.each do |message|%>
+              <%= render "messages/message", message: message%>
             <% end %>
-            <%= render "messages/message", message: message%>
           <%end%>
           <%= turbo_stream_from "typing_channel_#{@single_room.id}"%>
         </div>

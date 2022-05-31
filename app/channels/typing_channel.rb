@@ -8,14 +8,12 @@ class TypingChannel < ApplicationCable::Channel
   end
 
   def isTyping(data)
-    p "Thayu chhe bhaila"
-    p data
     # broadcast_to "typing_channel", partial: "users/status", user: self
     if data["is_typing"]
-      ActionCable.server.broadcast "typing_channel", "<turbo-stream action=\"replace\" target=\"typing_#{data["connection_id"]}\"><template><turbo-frame id=\"typing_channel\"></turbo-frame>\n<div id=\"typing_#{data["connection_id"]}\"><div class=\"loader\"><span></span>
+      ActionCable.server.broadcast "typing_channel", "<turbo-stream action=\"replace\" target=\"typing_#{data["connection_id"]}\"><template><turbo-frame id=\"typing_channel\"></turbo-frame>\n<div id=\"typing_#{data["connection_id"]}\" user=\"#{data["user"]}\"><div class=\"loader\"><span></span>
       <span></span><span></span></div></div>\n</template></turbo-stream>"
     else
-      ActionCable.server.broadcast "typing_channel", "<turbo-stream action=\"replace\" target=\"typing_#{data["connection_id"]}\"><template><turbo-frame id=\"typing_channel\"></turbo-frame>\n<div id=\"typing_#{data["connection_id"]}\"></div>\n</template></turbo-stream>"
+      ActionCable.server.broadcast "typing_channel", "<turbo-stream action=\"replace\" target=\"typing_#{data["connection_id"]}\"><template><turbo-frame id=\"typing_channel\"></turbo-frame>\n<div id=\"typing_#{data["connection_id"]}\"user=\"#{data["user"]}\ ></div>\n</template></turbo-stream>"
     end
   end
 
