@@ -58,12 +58,18 @@
               <%= render "messages/message", message: message%>
             <% end %>
           <%end%>
-          <%= turbo_stream_from "typing_channel_#{@single_room.id}"%>
+          <% User.all.each do |user|%>
+            <%= turbo_stream_from "typing_channel_#{@single_room.id}_#{user.id}"%>
+          <% end %>
         </div>
-        <div>
-          <%= turbo_frame_tag "typing_channel_#{@single_room.id}" %>
-          <div id="typing_<%= @single_room.id %>"></div>
-        </div>
+        <% User.all.each do |user|%>
+          <% unless user.id == current_user.id%>
+            <div>
+              <%= turbo_frame_tag "typing_channel_#{@single_room.id}_#{user.id}" %>
+              <div id="typing_<%= @single_room.id %>_<%= user.id %>"></div>
+            </div>
+          <% end %>
+        <% end %>
       </div>
       <div class="message_form">
         <%= render "layouts/new_message_form"%>

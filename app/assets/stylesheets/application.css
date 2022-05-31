@@ -138,13 +138,21 @@ body {
   color: #787878 !important;
 }
 
+.loader {
+  width: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3%;
+}
+
 .loader span {
   display: inline-block;
   vertical-align: middle;
-  width: 20px;
-  height: 20px;
+  width: 11px;
+  height: 11px;
   background: #787878;
-  border-radius: 20px;
+  border-radius: 7px;
   animation: loader 0.8s infinite alternate;
 }
 
