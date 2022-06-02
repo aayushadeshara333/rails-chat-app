@@ -24,6 +24,7 @@ class RoomsController < ApplicationController
     @single_room = Room.find(params[:id])
     @message = Message.new
     hash = MessagesBuilder.new(@single_room)
+    
     temp = []
     Room.joins(:participants).where("participants.user_id = #{current_user.id}").each do |room|
       room.participants.each do |participant|
@@ -32,9 +33,11 @@ class RoomsController < ApplicationController
     end
     @pagy, @messages = pagy_array(hash.getMessages.to_a.reverse, items: 1)
     @users = temp
+    
+    
     @messages[0][0] = [@messages[0][0]]
     @messages = Hash[*@messages[0]]
-    # @messages = @messages.reverse
+    
     if params[:page]
       render "users/scrollable_list"
     else

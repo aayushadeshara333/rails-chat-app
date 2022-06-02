@@ -3,6 +3,7 @@ import consumer from "./consumer"
 consumer.subscriptions.create("TypingChannel", {
   connected() {
     const input = document.getElementById("chat-text")
+    console.log(input)
     const connection_id = input.getAttribute("connection_id");
     const user = input.getAttribute("user");
     input.addEventListener("keyup", (e) => {

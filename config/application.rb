@@ -11,6 +11,7 @@ module ChatApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.time_zone = 'Chennai'
+    config.active_storage.variant_processor = :mini_magick
     config.after_initialize do |_config|
       User.update_all(status: User.statuses[:offline])
     end

@@ -1,7 +1,30 @@
 <div>
-  <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex",
-     data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |form| %>
+  <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |form| %>
+    <div id="attachment-previews" data-controller="message-preview" data-action="message-preview#preview">
+    </div>
+    <div class="image-upload d-flex align-items-center">
+      <label for="message-attachments">
+        <i class="bi bi-plus-circle upload-button"></i>
+      </label>
+      <%= form.file_field(:attachments, id: "message-attachments", multiple: true, 
+        data:{controller: "message-preview", action:"change->message-preview#preview"}) %>
+    </div>
     <%= form.text_field :body, id: "chat-text", class: "form-control msg-content w-100", autocomplete: "off",  connection_id: @single_room.id, user: current_user.id, required: true%>
-    <%= form.submit "Send", data: {disable_with: false}, class: "btn btn-warning text-light", style: "background-color: #52688F; border: none;"%>
+    <%= form.submit "Send", data: {disable_with: false, controller: "message-preview", action: "click->message-preview#clearPreviews"}, class: "btn btn-warning text-light", style: "background-color: #52688F; border: none;"%>
   <% end %>
 </div>
+<script>
+  $(document).ready(function() {
+    const connection_id = "<%= @single_room.id%>";
+    const user = "<%= current_user.id%>";
+    console.log($('#message-attachments').html)
+    $('#message-attachments').on('change', (e) => {
+      if (e.target.files[0]) {
+        $('#chat-text').removeAttr("required");
+        console.log($('#chat-text'))
+      } else {
+        $('#chat-text').attr("required", true);
+      }
+    })
+  });
+</script>
