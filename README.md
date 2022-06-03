@@ -1,24 +1,46 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Rails chat app
 
-Things you may want to cover:
+Rails chat app! Easiest way to co-ordinate with your project mates
+## Features
 
-* Ruby version
+- One to one chat
+- Room chat
+- Real time user status
+- Cross platform
 
-* System dependencies
 
-* Configuration
+## Screenshots
 
-* Database creation
+![App Screenshot](https://github.com/aayushadeshara333/rails-chat-app/blob/main/app/assets/images/ss.png?raw=true)
 
-* Database initialization
 
-* How to run the test suite
+## Ruby version
+3.1.2
+## Run Locally
 
-* Services (job queues, cache servers, search engines, etc.)
+Clone the project
 
-* Deployment instructions
+```bash
+  git clone https://github.com/aayushadeshara333/rails-chat-app.git
+```
 
-* ...
+Go to the project directory
+
+```bash
+  cd rails-chat-app
+```
+
+Install dependencies
+
+```bash
+  bundle
+```
+
+Start the server
+
+```bash
+  bin/rails start
+```
+
+That's it! You are good to go.
