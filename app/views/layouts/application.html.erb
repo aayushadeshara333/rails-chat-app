@@ -49,22 +49,26 @@
                   <div class="modal-body row">
                     <div class="col">
                       <h5>Users (One to one)</h5>
-                      <% users_chatted_with(current_user).each do |user|%>
-                        <div class="d-flex w-100 justify-content-between pb-1 align-items-center">
-                          <%= user.email if user.id != current_user.id %>
-                          <%= link_to "Chat", user_path(user), class: "btn btn-success"%>
-                        </div>
-                      <% end%>
+                      <div style="height: 30vh; overflow-y: auto;">
+                        <% users_chatted_with(current_user).each do |user|%>
+                          <div class="d-flex w-100 justify-content-between pb-1 align-items-center">
+                            <%= user.name if user.id != current_user.id %>
+                            <%= link_to "Chat", user_path(user), class: "btn btn-success"%>
+                          </div>
+                        <% end%>
+                      </div>
                     </div>
                     <div class="col">
                       <h5>Rooms</h5>
                       <%= render "layouts/new_room_form"%>
-                      <% rooms_of_user(current_user).each do |room|%>
-                        <div class="d-flex w-100 justify-content-between pb-1 align-items-center">
-                          <%= room.name%>
-                          <%= link_to "Join", room_path(room), class: "btn btn-success"%>
-                        </div>
-                      <% end %>
+                      <div style="height: 30vh; overflow-y: auto;">
+                        <% rooms_of_user(current_user).each do |room|%>
+                          <div class="d-flex w-100 justify-content-between pb-1 align-items-center">
+                            <%= room.name%>
+                            <%= link_to "Join", room_path(room), class: "btn btn-success"%>
+                          </div>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
                   <div class="modal-footer">

@@ -18,7 +18,9 @@ class UsersController < ApplicationController
     hash = MessagesBuilder.new(@single_room)
     @message = Message.new
     @pagy, @messages = pagy_array(hash.getMessages.to_a.reverse, items: 1)
-    @messages[0][0] = [@messages[0][0]]
+    if @messages[0]
+      @messages[0][0] = [@messages[0][0]]
+    end
     @messages = Hash[*@messages[0]]
     if params[:page]
       render "users/scrollable_list"

@@ -34,8 +34,9 @@ class RoomsController < ApplicationController
     @pagy, @messages = pagy_array(hash.getMessages.to_a.reverse, items: 1)
     @users = temp
     
-    
-    @messages[0][0] = [@messages[0][0]]
+    if @messages[0]
+      @messages[0][0] = [@messages[0][0]]
+    end
     @messages = Hash[*@messages[0]]
     
     if params[:page]
